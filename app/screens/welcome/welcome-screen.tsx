@@ -1,128 +1,179 @@
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable react-native/no-color-literals */
 import React, { FC } from "react"
-import { View, ViewStyle, TextStyle, ImageStyle, SafeAreaView } from "react-native"
+import { View, StyleSheet, Text, StatusBar } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { observer } from "mobx-react-lite"
-import {
-  Button,
-  Header,
-  Screen,
-  Text,
-  GradientBackground,
-  AutoImage as Image,
-} from "../../components"
-import { color, spacing, typography } from "../../theme"
+import { AutoImage as Image } from "../../components"
 import { NavigatorParamList } from "../../navigators"
+import AppIntroSlider from "react-native-app-intro-slider"
+import { color, spacing } from "../../theme"
+import { TouchableOpacity } from "react-native-gesture-handler"
 
-const bowserLogo = require("./bowser.png")
-
-const FULL: ViewStyle = { flex: 1 }
-const CONTAINER: ViewStyle = {
-  backgroundColor: color.transparent,
-  paddingHorizontal: spacing[4],
-}
-const TEXT: TextStyle = {
-  color: color.palette.white,
-  fontFamily: typography.primary,
-}
-const BOLD: TextStyle = { fontWeight: "bold" }
-const HEADER: TextStyle = {
-  paddingTop: spacing[3],
-  paddingBottom: spacing[4] + spacing[1],
-  paddingHorizontal: 0,
-}
-const HEADER_TITLE: TextStyle = {
-  ...TEXT,
-  ...BOLD,
-  fontSize: 12,
-  lineHeight: 15,
-  textAlign: "center",
-  letterSpacing: 1.5,
-}
-const TITLE_WRAPPER: TextStyle = {
-  ...TEXT,
-  textAlign: "center",
-}
-const TITLE: TextStyle = {
-  ...TEXT,
-  ...BOLD,
-  fontSize: 28,
-  lineHeight: 38,
-  textAlign: "center",
-}
-const ALMOST: TextStyle = {
-  ...TEXT,
-  ...BOLD,
-  fontSize: 26,
-  fontStyle: "italic",
-}
-const BOWSER: ImageStyle = {
-  alignSelf: "center",
-  marginVertical: spacing[5],
-  maxWidth: "100%",
-  width: 343,
-  height: 230,
-}
-const CONTENT: TextStyle = {
-  ...TEXT,
-  color: "#BAB6C8",
-  fontSize: 15,
-  lineHeight: 22,
-  marginBottom: spacing[5],
-}
-const CONTINUE: ViewStyle = {
-  paddingVertical: spacing[4],
-  paddingHorizontal: spacing[4],
-  backgroundColor: color.palette.deepPurple,
-}
-const CONTINUE_TEXT: TextStyle = {
-  ...TEXT,
-  ...BOLD,
-  fontSize: 13,
-  letterSpacing: 2,
-}
-const FOOTER: ViewStyle = { backgroundColor: "#20162D" }
-const FOOTER_CONTENT: ViewStyle = {
-  paddingVertical: spacing[4],
-  paddingHorizontal: spacing[4],
-}
+const data = [
+  {
+    id: 0,
+    title: "Transfer That Is Safe",
+    text: "Description.\nSay something cool",
+    image: require("./lock.png"),
+  },
+  {
+    id: 1,
+    title: "Title 2",
+    text: "Other cool stuff",
+    image: require("./lock.png"),
+  },
+  {
+    id: 2,
+    title: "Rocket guy",
+    text: "I'm already out of descriptions\nLorem ipsum bla bla bla",
+    image: require("./lock.png"),
+  },
+]
 
 export const WelcomeScreen: FC<StackScreenProps<NavigatorParamList, "welcome">> = observer(
   ({ navigation }) => {
     const nextScreen = () => navigation.navigate("demo")
 
-    return (
-      <View testID="WelcomeScreen" style={FULL}>
-        <GradientBackground colors={["#422443", "#281b34"]} />
-        <Screen style={CONTAINER} preset="scroll" backgroundColor={color.transparent}>
-          <Header headerTx="welcomeScreen.poweredBy" style={HEADER} titleStyle={HEADER_TITLE} />
-          <Text style={TITLE_WRAPPER}>
-            <Text style={TITLE} text="Your new app, " />
-            <Text style={ALMOST} text="almost" />
-            <Text style={TITLE} text="!" />
-          </Text>
-          <Text style={TITLE} preset="header" tx="welcomeScreen.readyForLaunch" />
-          <Image source={bowserLogo} style={BOWSER} />
-          <Text style={CONTENT}>
-            This probably isn't what your app is going to look like. Unless your designer handed you
-            this screen and, in that case, congrats! You're ready to ship.
-          </Text>
-          <Text style={CONTENT}>
-            For everyone else, this is where you'll see a live preview of your fully functioning app
-            using Ignite.
-          </Text>
-        </Screen>
-        <SafeAreaView style={FOOTER}>
-          <View style={FOOTER_CONTENT}>
-            <Button
-              testID="next-screen-button"
-              style={CONTINUE}
-              textStyle={CONTINUE_TEXT}
-              tx="welcomeScreen.continue"
-              onPress={nextScreen}
-            />
+    const _renderItem = ({ item }) => {
+      const { title, text, image } = item
+      return (
+        <View style={styles.slide}>
+          <Image source={image} style={styles.image} />
+          <View style={styles.container}>
+            {/* <View style={styles.paginationContainer}>
+              {data.map((item) => (
+                <TouchableOpacity
+                  key={item.id}
+                  style={slideIndex === item.id ? styles.dotActive : styles.dots}
+                  onPress={() => {
+                    console.log(item.id);
+                    
+                  }}
+                />
+              ))}
+            </View> */}
+            {_renderPagination(item.id)}
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.text}>{text}</Text>
+            <TouchableOpacity style={styles.button}>
+              <Text style={styles.buttonText}>Start banking</Text>
+            </TouchableOpacity>
           </View>
-        </SafeAreaView>
+        </View>
+      )
+    }
+
+    const _keyExtractor = (item) => item.title
+
+    const _renderPagination = (activeIndex: number) => {
+      return (
+        <View style={styles.paginationContainer}>
+          {data.length > 1 &&
+            data.map((_, i) => (
+              <TouchableOpacity
+                key={i}
+                style={i === activeIndex ? styles.dotActive : styles.dots}
+                onPress={() => {
+                  console.log(i);
+                }}
+              />
+            ))}
+        </View>
+      )
+    }
+
+    return (
+      <View testID="WelcomeScreen" style={{ flex: 1 }}>
+        <StatusBar hidden />
+        <AppIntroSlider
+          keyExtractor={_keyExtractor}
+          renderItem={_renderItem}
+          data={data}
+          showNextButton={false}
+          showDoneButton={false}
+          initialScrollIndex={0}
+          dotStyle={null}
+          activeDotStyle={null}
+          onSlideChange={(index) => {
+            if (index === data.length - 1) {
+              setTimeout(() => {
+                nextScreen()
+              }, 500)
+            }
+          }}
+        />
       </View>
     )
   },
 )
+
+const styles = StyleSheet.create({
+  button:{
+    alignItems: "center",
+    backgroundColor: color.palette.white,
+    borderRadius: 10,
+    justifyContent: "center",
+    marginTop: spacing[5],
+    padding: spacing[3],
+    width: 140,
+  },
+  buttonText:{
+    color: color.primary,
+    fontSize: 16,
+    fontWeight: "500",
+  },
+  container: {
+    backgroundColor: color.primary,
+    borderTopRightRadius: 70,
+    height: "100%",
+    marginRight: 52,
+    paddingHorizontal: spacing[5],
+    paddingVertical: spacing[6],
+  },
+  dotActive: {
+    backgroundColor: color.palette.darkOrange,
+    borderRadius: 8,
+    height: 8,
+    left: 0,
+    marginRight: spacing[2],
+    position: "relative",
+    top: 0,
+    width: 32,
+  },
+  dots: {
+    backgroundColor: color.palette.lightOrange,
+    borderRadius: 8,
+    height: 8,
+    left: 0,
+    marginRight: spacing[2],
+    position: "relative",
+    top: 0,
+    width: 16,
+  },
+  image: {
+    height: "70%",
+    width: "100%",
+  },
+  paginationContainer: {
+    flexDirection: "row",
+    marginBottom: spacing[3],
+  },
+  slide: {
+    backgroundColor: "#0E164D",
+    flex: 1,
+    paddingBottom: 32,
+  },
+  text: {
+    color: "rgba(255, 255, 255, 0.8)",
+    fontSize: 16,
+    fontWeight: "500",
+    lineHeight: spacing[5],
+    marginTop: spacing[2]
+  },
+  title: {
+    color: "white",
+    fontSize: 24,
+    fontWeight: "800",
+  },
+})

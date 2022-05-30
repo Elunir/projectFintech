@@ -45,6 +45,7 @@
     "mobx-state-tree": "5.0.1",
     "react": "17.0.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-43.0.0.tar.gz",
+    "react-native-app-intro-slider": "^4.0.4",
     "react-native-gesture-handler": "1.10.3",
     "react-native-keychain": "6.2.0",
     "react-native-safe-area-context": "3.3.2",
