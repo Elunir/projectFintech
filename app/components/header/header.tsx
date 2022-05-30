@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from "react"
 import { View, ViewStyle, TextStyle } from "react-native"
 import { HeaderProps } from "./header.props"
@@ -34,6 +35,7 @@ export function Header(props: HeaderProps) {
     headerTx,
     style,
     titleStyle,
+    rightButton,
   } = props
   const header = headerText || (headerTx && translate(headerTx)) || ""
 
@@ -41,7 +43,7 @@ export function Header(props: HeaderProps) {
     <View style={[ROOT, style]}>
       {leftIcon ? (
         <Button preset="link" onPress={onLeftPress}>
-          <Icon icon={leftIcon} />
+          <Icon icon={leftIcon} style={{width:48, height:48}} />
         </Button>
       ) : (
         <View style={LEFT} />
@@ -51,8 +53,13 @@ export function Header(props: HeaderProps) {
       </View>
       {rightIcon ? (
         <Button preset="link" onPress={onRightPress}>
-          <Icon icon={rightIcon} />
+          <Icon icon={rightIcon} style={{width:48, height:48}} />
         </Button>
+      ) : (
+        <View style={RIGHT} />
+      )}
+      {rightButton ? (
+        props.rightButton
       ) : (
         <View style={RIGHT} />
       )}

@@ -34,6 +34,8 @@ const data = [
 export const WelcomeScreen: FC<StackScreenProps<NavigatorParamList, "welcome">> = observer(
   ({ navigation }) => {
     const nextScreen = () => navigation.navigate("demo")
+    const homeScreen = () => navigation.navigate("home")
+
 
     const _renderItem = ({ item }) => {
       const { title, text, image } = item
@@ -41,22 +43,10 @@ export const WelcomeScreen: FC<StackScreenProps<NavigatorParamList, "welcome">> 
         <View style={styles.slide}>
           <Image source={image} style={styles.image} />
           <View style={styles.container}>
-            {/* <View style={styles.paginationContainer}>
-              {data.map((item) => (
-                <TouchableOpacity
-                  key={item.id}
-                  style={slideIndex === item.id ? styles.dotActive : styles.dots}
-                  onPress={() => {
-                    console.log(item.id);
-                    
-                  }}
-                />
-              ))}
-            </View> */}
             {_renderPagination(item.id)}
             <Text style={styles.title}>{title}</Text>
             <Text style={styles.text}>{text}</Text>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={homeScreen}>
               <Text style={styles.buttonText}>Start banking</Text>
             </TouchableOpacity>
           </View>
@@ -75,7 +65,7 @@ export const WelcomeScreen: FC<StackScreenProps<NavigatorParamList, "welcome">> 
                 key={i}
                 style={i === activeIndex ? styles.dotActive : styles.dots}
                 onPress={() => {
-                  console.log(i);
+                  console.log(i)
                 }}
               />
             ))}
@@ -85,7 +75,6 @@ export const WelcomeScreen: FC<StackScreenProps<NavigatorParamList, "welcome">> 
 
     return (
       <View testID="WelcomeScreen" style={{ flex: 1 }}>
-        <StatusBar hidden />
         <AppIntroSlider
           keyExtractor={_keyExtractor}
           renderItem={_renderItem}
@@ -109,7 +98,7 @@ export const WelcomeScreen: FC<StackScreenProps<NavigatorParamList, "welcome">> 
 )
 
 const styles = StyleSheet.create({
-  button:{
+  button: {
     alignItems: "center",
     backgroundColor: color.palette.white,
     borderRadius: 10,
@@ -118,7 +107,7 @@ const styles = StyleSheet.create({
     padding: spacing[3],
     width: 140,
   },
-  buttonText:{
+  buttonText: {
     color: color.primary,
     fontSize: 16,
     fontWeight: "500",
@@ -169,7 +158,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "500",
     lineHeight: spacing[5],
-    marginTop: spacing[2]
+    marginTop: spacing[2],
   },
   title: {
     color: "white",

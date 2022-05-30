@@ -10,6 +10,7 @@ import { NavigationContainer, DefaultTheme, DarkTheme } from "@react-navigation/
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { WelcomeScreen, DemoScreen, DemoListScreen } from "../screens"
 import { navigationRef, useBackButtonHandler } from "./navigation-utilities"
+import { HomeScreen } from "../screens/home/home-screen"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -28,6 +29,7 @@ export type NavigatorParamList = {
   demo: undefined
   demoList: undefined
   // 🔥 Your screens go here
+  home: undefined
 }
 
 // Documentation: https://reactnavigation.org/docs/stack-navigator/
@@ -45,6 +47,7 @@ const AppStack = () => {
       <Stack.Screen name="demo" component={DemoScreen} />
       <Stack.Screen name="demoList" component={DemoListScreen} />
       {/** 🔥 Your screens go here */}
+      <Stack.Screen name="home" component={HomeScreen} />
     </Stack.Navigator>
   )
 }
