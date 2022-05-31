@@ -15,6 +15,9 @@ export const palette = {
   primaryBlueDarker: "#0E164D",
   primaryBlueDarkest: "#010A43",
   lightOrange: "#FDD590",
-  darkOrange: "#FFB129"
+  darkOrange: "#FFB129",
+  sent: "#FAAD39",
+  received: "#1DC7AC",
+  failed: "#FE4A54"
 }
 

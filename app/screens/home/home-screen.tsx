@@ -25,7 +25,7 @@ export const HomeScreen: FC<StackScreenProps<NavigatorParamList, "home">> = obse
 
     // Pull in navigation via hook
     // const navigation = useNavigation()
-    const currencyIcon = require("./currency.png")
+    const currencyIcon = require("../../../assets/images/currency.png")
 
     const rightSideButton = (
       <TouchableOpacity style={styles.headerButton}>

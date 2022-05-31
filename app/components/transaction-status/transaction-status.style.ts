@@ -6,15 +6,21 @@ const styling = StyleSheet.create({
     alignItems: "center",
     backgroundColor: color.error,
     borderRadius: 50,
+    flexDirection: "row",
     justifyContent: "center",
     marginTop: spacing[3],
-    padding: spacing[2],
+    paddingVertical: spacing[3],
   },
-  status:{
+  status: {
     color: color.palette.white,
-    fontSize: 16,
-    fontWeight: "600"
-  }
+    fontSize: 14,
+    fontWeight: "500",
+  },
+  statusIcon: {
+    height: 16,
+    marginRight: spacing[1],
+    width: 16,
+  },
 })
 
 export default styling
