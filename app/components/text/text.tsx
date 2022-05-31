@@ -11,17 +11,28 @@ import { translate } from "../../i18n"
  */
 export function Text(props: TextProps) {
   // grab the props
-  const { preset = "default", tx, txOptions, text, children, style: styleOverride, ...rest } = props
+  const { preset = "default", tx, txOptions, text, children, fontType, style: styleOverride, ...rest } = props
 
   // figure out which content to use
   const i18nText = tx && translate(tx, txOptions)
   const content = i18nText || text || children
 
+  const setFontType = (fontType: string) => {
+    switch (fontType) {
+      case 'bold': return 'Inter-Bold'
+      case 'medium': return 'Inter-Medium'
+      case 'light': return 'Inter-Light'
+      case 'SemiBold': return 'Inter-SemiBold'
+      default: return 'Inter-Regular'
+    }
+  }
+
   const style = presets[preset] || presets.default
+  const font = setFontType(props.fontType?props.fontType:'normal')
   const styles = [style, styleOverride]
 
   return (
-    <ReactNativeText {...rest} style={styles}>
+    <ReactNativeText {...rest} style={[styles, { fontFamily: font }]}>
       {content}
     </ReactNativeText>
   )

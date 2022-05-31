@@ -19,6 +19,9 @@ import { AppNavigator, useNavigationPersistence } from "./navigators"
 import { RootStore, RootStoreProvider, setupRootStore } from "./models"
 import { ToggleStorybook } from "../storybook/toggle-storybook"
 import { ErrorBoundary } from "./screens/error/error-boundary"
+import 'react-native-gesture-handler'
+import { ActivityIndicator, View , Text} from "react-native"
+import gStyle from "./gStyle"
 
 // This puts screens in a native ViewController or Activity. If you want fully native
 // stack navigation, use `createNativeStackNavigator` in place of `createStackNavigator`:
@@ -30,6 +33,7 @@ export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
  * This is the root component of our app.
  */
 function App() {
+  const [fontLoaded, setFontLoaded] = useState(false)
   const [rootStore, setRootStore] = useState<RootStore | undefined>(undefined)
   const {
     initialNavigationState,
@@ -37,10 +41,13 @@ function App() {
     isRestored: isNavigationStateRestored,
   } = useNavigationPersistence(storage, NAVIGATION_PERSISTENCE_KEY)
 
+
   // Kick off initial async loading actions, like loading fonts and RootStore
   useEffect(() => {
     ;(async () => {
-      await initFonts() // expo
+      await initFonts().then(()=>console.log()
+      ) // expo
+      setFontLoaded(true)
       setupRootStore().then(setRootStore)
     })()
   }, [])
@@ -59,10 +66,14 @@ function App() {
       <RootStoreProvider value={rootStore}>
         <SafeAreaProvider initialMetrics={initialWindowMetrics}>
           <ErrorBoundary catchErrors={"always"}>
-            <AppNavigator
+{fontLoaded?(            <AppNavigator
               initialState={initialNavigationState}
               onStateChange={onNavigationStateChange}
-            />
+            />):(
+             <View style={gStyle.loader}>
+               <ActivityIndicator size={'large'} />
+             </View>
+            )}
           </ErrorBoundary>
         </SafeAreaProvider>
       </RootStoreProvider>

@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-native/no-color-literals */
 import React, { FC } from "react"
-import { View, StyleSheet, Text, StatusBar } from "react-native"
+import { View, StyleSheet, Text } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { observer } from "mobx-react-lite"
 import { AutoImage as Image } from "../../components"
