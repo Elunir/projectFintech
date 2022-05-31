@@ -4,12 +4,11 @@ import { color, spacing } from "../../theme"
 const styling = StyleSheet.create({
   container: {
     alignItems: "center",
-    backgroundColor: color.error,
     borderRadius: 50,
     flexDirection: "row",
     justifyContent: "center",
     marginTop: spacing[3],
-    paddingVertical: spacing[3],
+    padding: spacing[3],
   },
   status: {
     color: color.palette.white,

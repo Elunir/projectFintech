@@ -35,9 +35,13 @@ export const styling = StyleSheet.create({
     marginRight: spacing[3],
     width: 52
   },
-  userInfo:{
+  userImage:{
     alignItems: "center",
     flexDirection: "row",
+  },
+  userInfo:{
+    alignItems: "flex-start",
+    flexDirection: "column",
   }
 })
 

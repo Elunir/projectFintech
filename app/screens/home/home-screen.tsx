@@ -1,6 +1,6 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
-import { TouchableOpacity, View, Text, Image } from "react-native"
+import { TouchableOpacity, View, Text, Image, FlatList } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../navigators"
 // import { useNavigation } from "@react-navigation/native"
@@ -33,6 +33,56 @@ export const HomeScreen: FC<StackScreenProps<NavigatorParamList, "home">> = obse
       </TouchableOpacity>
     )
 
+    const transactionList = {
+      transactions: [
+        {
+          name: "Adeboye Usman",
+          status: "Failed",
+          amount: "1,000",
+        },
+        {
+          name: "Mercy Popoola",
+          status: "Sent",
+          amount: "1,000",
+        },
+        {
+          name: "Onome Adetayo",
+          status: "Received",
+          amount: "1,000",
+        },
+        {
+          name: "Adeboye Usman",
+          status: "Failed",
+          amount: "1,000",
+        },
+        {
+          name: "Mercy Popoola",
+          status: "Sent",
+          amount: "1,000",
+        },
+        {
+          name: "Onome Adetayo",
+          status: "Received",
+          amount: "1,000",
+        },
+        {
+          name: "Adeboye Usman",
+          status: "Failed",
+          amount: "1,000",
+        },
+        {
+          name: "Mercy Popoola",
+          status: "Sent",
+          amount: "1,000",
+        },
+        {
+          name: "Onome Adetayo",
+          status: "Received",
+          amount: "1,000",
+        },
+      ]
+    }
+
     return (
       <View testID="HomeScreen" style={styles.root}>
         <StatusBar style="light" />
@@ -59,7 +109,15 @@ export const HomeScreen: FC<StackScreenProps<NavigatorParamList, "home">> = obse
           </TouchableOpacity>
         </View>
         <Sheet>
-          <Transaction />
+          <FlatList 
+            data={transactionList.transactions}
+            renderItem={({ item }) => (
+              <Transaction name={item.name} status={item.status} amount={item.amount} />
+            )}
+            keyExtractor={(item) => item.name}
+            style={styles.transactionList}
+            scrollEnabled={true}
+          />
         </Sheet>
       </View>
     )

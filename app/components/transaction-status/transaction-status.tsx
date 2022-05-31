@@ -10,7 +10,7 @@ export interface TransactionStatusProps {
    * An optional style override useful for padding & margin.
    */
   style?: StyleProp<ViewStyle>
-  status?: "Received" | "Failed" | "Sent"
+  status?: "Received" | "Failed" | "Sent" | string
 }
 
 /**
@@ -22,29 +22,33 @@ export const TransactionStatus = observer(function TransactionStatus(
   const { style } = props
   const styles = Object.assign({}, styling.container, style)
   const [status, setStatus] = useState(undefined)
-  const [statusColor, setStatusColor] = useState(undefined)
+  const [statusColor, setStatusColor] = useState(color.received)
 
   useEffect(() => {
     switch (props.status) {
       case "Received":
         setStatusColor(color.received)
-        return setStatus(require("./assets/received.png"))
+        setStatus(require("./assets/received.png"))
+        break
       case "Failed":
-      setStatusColor(color.failed)
-        return setStatus(require("./assets/failed.png"))
+        setStatusColor(color.failed)
+        setStatus(require("./assets/failed.png"))
+        break
       case "Sent":
         setStatusColor(color.sent)
-        return setStatus(require("./assets/sent.png"))
+        setStatus(require("./assets/sent.png"))
+        break
 
       default:
+        setStatus(undefined)
         break
     }
-  }, [])
+  }, [props.status])
 
   return (
     <>
       {props.status ? (
-        <View style={[styles, {backgroundColor: statusColor}]}>
+        <View style={[styles, { backgroundColor: statusColor }]}>
           <Image source={status} style={styling.statusIcon} />
           <Text style={styling.status}>{props.status}</Text>
         </View>

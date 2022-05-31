@@ -9,30 +9,35 @@ export interface TransactionProps {
    * An optional style override useful for padding & margin.
    */
   style?: StyleProp<ViewStyle>
+  name: string
+  status?: "Received" | "Failed" | "Sent" | string
+  amount: string
 }
 
 /**
  * Describe your component here
  */
 export const Transaction = observer(function Transaction(props: TransactionProps) {
-  const { style } = props
+  const { style, name, status, amount } = props
   const styles = Object.assign({}, styling.container, style)
 
   const profileImage = require("./profile.png")
-  
 
   return (
     <View style={styles}>
-      <View style={styling.userInfo}>
+      <View style={styling.userImage}>
         <Image source={profileImage} style={styling.profileImage} />
-        <View>
-          <Text style={styling.nameOfUser}>Name of User</Text>
-          <TransactionStatus status="Received" />
+        <View style={styling.userInfo}>
+          <Text style={styling.nameOfUser}>{name}</Text>
+          <TransactionStatus status={status} />
         </View>
       </View>
       <View style={styling.currencyContainer}>
-        <Image source={require("../../../assets/images/currency.png")} style={styling.currencyIcon} />
-        <Text style={styling.currentBalance}>200,000</Text>
+        <Image
+          source={require("../../../assets/images/currency.png")}
+          style={styling.currencyIcon}
+        />
+        <Text style={styling.currentBalance}>{amount}</Text>
       </View>
     </View>
   )

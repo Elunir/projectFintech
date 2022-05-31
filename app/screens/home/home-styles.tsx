@@ -55,8 +55,8 @@ export const styles = StyleSheet.create({
       backgroundColor: color.palette.primaryBlueDarkest,
       flex: 1,
     },
-    transactionContainer:{
-      
+    transactionList:{
+
     },
     transactionTypeButton: {
       alignItems: "center",
