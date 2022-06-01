@@ -46,7 +46,7 @@ export const Sheet = observer(function Sheet(props: SheetProps) {
             </TouchableOpacity>
           </View>
         </View>
-        <View style={styles.childrenContainer}>{props.children}</View>
+        <View style={styles.childrenContainer}>{children}</View>
       </View>
     </BottomSheet>
   )

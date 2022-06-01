@@ -2,29 +2,15 @@ import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
 import { TouchableOpacity, View, Text, Image, FlatList } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
-import { NavigatorParamList } from "../../navigators"
-// import { useNavigation } from "@react-navigation/native"
-// import { useStores } from "../../models"
+import { navigate, NavigatorParamList } from "../../navigators"
 import { StatusBar } from "expo-status-bar"
-import { Header, Sheet, Text as CustomText, Transaction, TransactionStatus } from "../../components"
+import { Header, Sheet, Transaction } from "../../components"
 import styles from "./home-styles"
+import { color } from "../../theme"
+import transactionList from "./transactions"
 
-// STOP! READ ME FIRST!
-// To fix the TS error below, you'll need to add the following things in your navigation config:
-// - Add `home: undefined` to NavigatorParamList
-// - Import your screen, and add it to the stack:
-//     `<Stack.Screen name="home" component={HomeScreen} />`
-// Hint: Look for the 🔥!
-
-// REMOVE ME! ⬇️ This TS ignore will not be necessary after you've added the correct navigator param type
-// @ts-ignore
 export const HomeScreen: FC<StackScreenProps<NavigatorParamList, "home">> = observer(
   function HomeScreen() {
-    // Pull in one of our MST stores
-    // const { someStore, anotherStore } = useStores()
-
-    // Pull in navigation via hook
-    // const navigation = useNavigation()
     const currencyIcon = require("../../../assets/images/currency.png")
 
     const rightSideButton = (
@@ -33,54 +19,25 @@ export const HomeScreen: FC<StackScreenProps<NavigatorParamList, "home">> = obse
       </TouchableOpacity>
     )
 
-    const transactionList = {
-      transactions: [
-        {
-          name: "Adeboye Usman",
-          status: "Failed",
-          amount: "1,000",
-        },
-        {
-          name: "Mercy Popoola",
-          status: "Sent",
-          amount: "1,000",
-        },
-        {
-          name: "Onome Adetayo",
-          status: "Received",
-          amount: "1,000",
-        },
-        {
-          name: "Adeboye Usman",
-          status: "Failed",
-          amount: "1,000",
-        },
-        {
-          name: "Mercy Popoola",
-          status: "Sent",
-          amount: "1,000",
-        },
-        {
-          name: "Onome Adetayo",
-          status: "Received",
-          amount: "1,000",
-        },
-        {
-          name: "Adeboye Usman",
-          status: "Failed",
-          amount: "1,000",
-        },
-        {
-          name: "Mercy Popoola",
-          status: "Sent",
-          amount: "1,000",
-        },
-        {
-          name: "Onome Adetayo",
-          status: "Received",
-          amount: "1,000",
-        },
-      ]
+    const _renderItem = ({ item, index }) => (
+      <Transaction
+        style={
+          index % 2 == 0
+            ? {
+                backgroundColor: color.palette.primaryBlueDark,
+              }
+            : {
+                backgroundColor: color.palette.primaryBlueDarker,
+              }
+        }
+        name={item.name}
+        status={item.status}
+        amount={item.amount}
+      />
+    )
+
+    function sendMoney(){
+      navigate('newRequest',{})
     }
 
     return (
@@ -89,6 +46,7 @@ export const HomeScreen: FC<StackScreenProps<NavigatorParamList, "home">> = obse
         <Header
           headerText="Hello Sandra,"
           leftIcon="menu"
+          iconSize={48}
           style={styles.header}
           titleStyle={styles.headerTitle}
           rightButton={rightSideButton}
@@ -104,16 +62,14 @@ export const HomeScreen: FC<StackScreenProps<NavigatorParamList, "home">> = obse
           <TouchableOpacity style={styles.transactionTypeButton}>
             <Text style={styles.transactionTypeText}>Request Money</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.transactionTypeButton}>
+          <TouchableOpacity style={styles.transactionTypeButton} onPress={sendMoney}>
             <Text style={styles.transactionTypeText}>Send Money</Text>
           </TouchableOpacity>
         </View>
         <Sheet>
-          <FlatList 
+          <FlatList
             data={transactionList.transactions}
-            renderItem={({ item }) => (
-              <Transaction name={item.name} status={item.status} amount={item.amount} />
-            )}
+            renderItem={_renderItem}
             keyExtractor={(item) => item.name}
             style={styles.transactionList}
             scrollEnabled={true}

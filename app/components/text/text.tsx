@@ -17,22 +17,22 @@ export function Text(props: TextProps) {
   const i18nText = tx && translate(tx, txOptions)
   const content = i18nText || text || children
 
-  const setFontType = (fontType: string) => {
-    switch (fontType) {
-      case 'bold': return 'Inter-Bold'
-      case 'medium': return 'Inter-Medium'
-      case 'light': return 'Inter-Light'
-      case 'SemiBold': return 'Inter-SemiBold'
-      default: return 'Inter-Regular'
-    }
-  }
+  // const setFontType = (fontType: string) => {
+  //   switch (fontType) {
+  //     case 'bold': return 'Inter-Bold'
+  //     case 'medium': return 'Inter-Medium'
+  //     case 'light': return 'Inter-Light'
+  //     case 'SemiBold': return 'Inter-SemiBold'
+  //     default: return 'Inter-Regular'
+  //   }
+  // }
 
   const style = presets[preset] || presets.default
-  const font = setFontType(props.fontType?props.fontType:'normal')
+  // const font = setFontType(props.fontType?props.fontType:'normal')
   const styles = [style, styleOverride]
 
   return (
-    <ReactNativeText {...rest} style={[styles, { fontFamily: font }]}>
+    <ReactNativeText {...rest} style={styles}>
       {content}
     </ReactNativeText>
   )

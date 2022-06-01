@@ -4,6 +4,8 @@ import { observer } from "mobx-react-lite"
 import { Text } from "../text/text"
 import { styling } from "./transaction.style"
 import { TransactionStatus } from "../transaction-status/transaction-status"
+import { useEffect, useState } from "react"
+import { color } from "../../theme"
 export interface TransactionProps {
   /**
    * An optional style override useful for padding & margin.
@@ -21,7 +23,25 @@ export const Transaction = observer(function Transaction(props: TransactionProps
   const { style, name, status, amount } = props
   const styles = Object.assign({}, styling.container, style)
 
-  const profileImage = require("./profile.png")
+  const profileImage = require("../../../assets/images/profile.png")
+
+  const [statusColor, setStatusColor] = useState(color.received)
+
+  useEffect(() => {
+    switch (status) {
+      case "Received":
+        setStatusColor(color.received)
+        break
+      case "Failed":
+        setStatusColor(color.failed)
+        break
+      case "Sent":
+        setStatusColor(color.sent)
+        break
+      default:
+        break
+    }
+  }, [status])
 
   return (
     <View style={styles}>
@@ -37,7 +57,16 @@ export const Transaction = observer(function Transaction(props: TransactionProps
           source={require("../../../assets/images/currency.png")}
           style={styling.currencyIcon}
         />
-        <Text style={styling.currentBalance}>{amount}</Text>
+        <Text
+          style={[
+            styling.currentBalance,
+            {
+              color: statusColor,
+            },
+          ]}
+        >
+          {amount}
+        </Text>
       </View>
     </View>
   )

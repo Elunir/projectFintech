@@ -3,20 +3,19 @@ import { color, spacing } from "../../theme"
 
 export const styling = StyleSheet.create({
   container: {
-      alignItems:'center',
-      backgroundColor: color.palette.primaryBlueDark,
-      flexDirection: 'row',
-      justifyContent: "space-between",
-      padding: spacing[4]
+    backgroundColor: color.palette.primaryBlueDark,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: spacing[4],
   },
   currencyContainer: {
     alignItems: "center",
     flexDirection: "row",
   },
   currencyIcon: {
-    color: color.palette.white,
+    // color: color.palette.white,
     height: 12,
-    marginRight: spacing[2],
+    marginRight: spacing[1],
     width: 12,
   },
   currentBalance: {
@@ -24,7 +23,7 @@ export const styling = StyleSheet.create({
     fontSize: 16,
     fontWeight: "700",
   },
-  nameOfUser:{
+  nameOfUser: {
     color: color.palette.primaryBlueLightText,
     fontSize: 16,
     fontWeight: "900",
@@ -33,16 +32,16 @@ export const styling = StyleSheet.create({
     borderRadius: 50,
     height: 52,
     marginRight: spacing[3],
-    width: 52
+    width: 52,
   },
-  userImage:{
+  userImage: {
     alignItems: "center",
     flexDirection: "row",
   },
-  userInfo:{
+  userInfo: {
     alignItems: "flex-start",
     flexDirection: "column",
-  }
+  },
 })
 
 export default styling

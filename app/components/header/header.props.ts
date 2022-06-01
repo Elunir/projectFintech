@@ -18,6 +18,8 @@ export interface HeaderProps {
    */
   leftIcon?: IconTypes
 
+  iconSize?: number
+
   /**
    * What happens when you press the left icon
    */

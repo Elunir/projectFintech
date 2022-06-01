@@ -19,8 +19,8 @@ import { AppNavigator, useNavigationPersistence } from "./navigators"
 import { RootStore, RootStoreProvider, setupRootStore } from "./models"
 import { ToggleStorybook } from "../storybook/toggle-storybook"
 import { ErrorBoundary } from "./screens/error/error-boundary"
-import 'react-native-gesture-handler'
-import { ActivityIndicator, View , Text} from "react-native"
+import "react-native-gesture-handler"
+import { ActivityIndicator, View, Text } from "react-native"
 import gStyle from "./gStyle"
 
 // This puts screens in a native ViewController or Activity. If you want fully native
@@ -41,13 +41,10 @@ function App() {
     isRestored: isNavigationStateRestored,
   } = useNavigationPersistence(storage, NAVIGATION_PERSISTENCE_KEY)
 
-
   // Kick off initial async loading actions, like loading fonts and RootStore
   useEffect(() => {
     ;(async () => {
-      await initFonts().then(()=>console.log()
-      ) // expo
-      setFontLoaded(true)
+      await initFonts().then(() => setFontLoaded(true))
       setupRootStore().then(setRootStore)
     })()
   }, [])
@@ -66,13 +63,15 @@ function App() {
       <RootStoreProvider value={rootStore}>
         <SafeAreaProvider initialMetrics={initialWindowMetrics}>
           <ErrorBoundary catchErrors={"always"}>
-{fontLoaded?(            <AppNavigator
-              initialState={initialNavigationState}
-              onStateChange={onNavigationStateChange}
-            />):(
-             <View style={gStyle.loader}>
-               <ActivityIndicator size={'large'} />
-             </View>
+            {fontLoaded ? (
+              <AppNavigator
+                initialState={initialNavigationState}
+                onStateChange={onNavigationStateChange}
+              />
+            ) : (
+              <View style={gStyle.loader}>
+                <ActivityIndicator size={"large"} />
+              </View>
             )}
           </ErrorBoundary>
         </SafeAreaProvider>

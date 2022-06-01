@@ -47,6 +47,7 @@
     "react": "17.0.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-43.0.0.tar.gz",
     "react-native-app-intro-slider": "^4.0.4",
+    "react-native-big-list": "^1.5.4",
     "react-native-gesture-handler": "~1.10.2",
     "react-native-keychain": "6.2.0",
     "react-native-reanimated": "~2.2.0",
@@ -56,6 +57,7 @@
     "reactotron-mst": "3.1.4",
     "reactotron-react-js": "^3.3.7",
     "reactotron-react-native": "5.0.2",
+    "recyclerlistview": "^3.0.5",
     "validate.js": "0.13.1"
   },
   "devDependencies": {
