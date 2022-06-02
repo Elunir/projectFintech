@@ -1,14 +1,14 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-native/no-color-literals */
 import React, { FC } from "react"
-import { View, StyleSheet, Text } from "react-native"
+import { View, Text } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { observer } from "mobx-react-lite"
 import { AutoImage as Image } from "../../components"
 import { NavigatorParamList } from "../../navigators"
 import AppIntroSlider from "react-native-app-intro-slider"
-import { color, spacing } from "../../theme"
 import { TouchableOpacity } from "react-native-gesture-handler"
+import styles from './welcome-styles'
 
 const data = [
   {
@@ -33,7 +33,6 @@ const data = [
 
 export const WelcomeScreen: FC<StackScreenProps<NavigatorParamList, "welcome">> = observer(
   ({ navigation }) => {
-    const nextScreen = () => navigation.navigate("demo")
     const homeScreen = () => navigation.navigate("home")
 
 
@@ -87,7 +86,7 @@ export const WelcomeScreen: FC<StackScreenProps<NavigatorParamList, "welcome">> 
           onSlideChange={(index) => {
             if (index === data.length - 1) {
               setTimeout(() => {
-                nextScreen()
+                homeScreen()
               }, 500)
             }
           }}
@@ -96,73 +95,3 @@ export const WelcomeScreen: FC<StackScreenProps<NavigatorParamList, "welcome">> 
     )
   },
 )
-
-const styles = StyleSheet.create({
-  button: {
-    alignItems: "center",
-    backgroundColor: color.palette.white,
-    borderRadius: 10,
-    justifyContent: "center",
-    marginTop: spacing[5],
-    padding: spacing[3],
-    width: 140,
-  },
-  buttonText: {
-    color: color.primary,
-    fontSize: 16,
-    fontWeight: "500",
-  },
-  container: {
-    backgroundColor: color.primary,
-    borderTopRightRadius: 70,
-    height: "100%",
-    marginRight: 52,
-    paddingHorizontal: spacing[5],
-    paddingVertical: spacing[6],
-  },
-  dotActive: {
-    backgroundColor: color.palette.darkOrange,
-    borderRadius: 8,
-    height: 8,
-    left: 0,
-    marginRight: spacing[2],
-    position: "relative",
-    top: 0,
-    width: 32,
-  },
-  dots: {
-    backgroundColor: color.palette.lightOrange,
-    borderRadius: 8,
-    height: 8,
-    left: 0,
-    marginRight: spacing[2],
-    position: "relative",
-    top: 0,
-    width: 16,
-  },
-  image: {
-    height: "70%",
-    width: "100%",
-  },
-  paginationContainer: {
-    flexDirection: "row",
-    marginBottom: spacing[3],
-  },
-  slide: {
-    backgroundColor: "#0E164D",
-    flex: 1,
-    paddingBottom: 32,
-  },
-  text: {
-    color: "rgba(255, 255, 255, 0.8)",
-    fontSize: 16,
-    fontWeight: "500",
-    lineHeight: spacing[5],
-    marginTop: spacing[2],
-  },
-  title: {
-    color: "white",
-    fontSize: 24,
-    fontWeight: "800",
-  },
-})

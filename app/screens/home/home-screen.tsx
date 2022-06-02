@@ -41,6 +41,9 @@ export const HomeScreen: FC<StackScreenProps<NavigatorParamList, "home">> = obse
     function sendMoney(){
       navigate('newRequest',{})
     }
+    function welcomeScreen(){
+      navigate('welcome')
+    }
 
     return (
       <View testID="HomeScreen" style={styles.root}>
@@ -48,6 +51,7 @@ export const HomeScreen: FC<StackScreenProps<NavigatorParamList, "home">> = obse
         <Header
           headerText="Hello Sandra,"
           leftIcon="menu"
+          onLeftPress={welcomeScreen}
           iconSize={48}
           style={styles.header}
           titleStyle={styles.headerTitle}

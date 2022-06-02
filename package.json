@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "@expo/webpack-config": "^0.12.71",
+    "@freakycoder/react-native-bounceable": ">= 0.2.2",
     "@gorhom/bottom-sheet": "^4",
     "@react-native-async-storage/async-storage": "~1.15.0",
     "@react-navigation/native": "~6.0.1",
@@ -40,6 +41,7 @@
     "expo-localization": "~11.0.0",
     "expo-modules-core": "~0.4.10",
     "expo-status-bar": "~1.1.0",
+    "expo-updates": "~0.10.15",
     "i": "^0.3.7",
     "i18n-js": "3.8.0",
     "mobx": "6.1.8",
@@ -48,6 +50,7 @@
     "npm": "^8.11.0",
     "react": "17.0.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-43.0.0.tar.gz",
+    "react-native-animated-spinkit": "^1.4.1",
     "react-native-app-intro-slider": "^4.0.4",
     "react-native-big-list": "^1.5.4",
     "react-native-dynamic-search-bar": "WrathChaos/react-native-dynamic-search-bar#expo",
@@ -62,9 +65,7 @@
     "reactotron-react-js": "^3.3.7",
     "reactotron-react-native": "5.0.2",
     "recyclerlistview": "^3.0.5",
-    "validate.js": "0.13.1",
-    "react-native-animated-spinkit": "^1.4.1",
-    "@freakycoder/react-native-bounceable": ">= 0.2.2"
+    "validate.js": "0.13.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

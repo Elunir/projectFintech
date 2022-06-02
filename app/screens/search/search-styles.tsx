@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
   header: {
     alignItems: "center",
     justifyContent: "center",
-    marginTop: Platform.OS === "ios" ? 24 : 24,
+    marginTop: Platform.OS === "ios" ? 24 :0,
   },
   headerButton: {
     backgroundColor: color.palette.primaryBlueDark,
