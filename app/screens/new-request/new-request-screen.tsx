@@ -2,7 +2,7 @@ import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
 import { View, Image, Text } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
-import { goBack, NavigatorParamList } from "../../navigators"
+import { goBack, navigate, NavigatorParamList } from "../../navigators"
 import { Header } from "../../components"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../../models"
@@ -14,7 +14,7 @@ export const NewRequestScreen: FC<StackScreenProps<NavigatorParamList, "newReque
     const backgroundImage = require("../../../assets/images/backgroundShape.png")
 
     return (
-      <View testID="HomeScreen" style={styles.root}>
+      <View testID="NewRequest" style={styles.root}>
         <Image source={backgroundImage} style={styles.image} />
         <Header
           headerText="New Request"
@@ -45,7 +45,7 @@ export const NewRequestScreen: FC<StackScreenProps<NavigatorParamList, "newReque
             </View>
           </View>
           <View>
-            <TouchableOpacity style={styles.buttonSendMoney}>
+            <TouchableOpacity style={styles.buttonSendMoney} onPress={()=> navigate('search')}>
               <Text style={styles.buttonSendMoneyText}>Send Money</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.buttonDontSend}>

@@ -21,6 +21,7 @@ export const palette = {
   sent: "#FAAD39",
   received: "#1DC7AC",
   failed: "#FE4A54",
-  pink: "#FF2E63"
+  pink: "#FF2E63",
+  green:"#1DC76B",
 }
 

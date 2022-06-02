@@ -5,8 +5,9 @@ import { HeaderProps } from "./header.props"
 import { Button } from "../button/button"
 import { Text } from "../text/text"
 import { Icon } from "../icon/icon"
-import { spacing } from "../../theme"
+import { color, spacing } from "../../theme"
 import { translate } from "../../i18n/"
+import SearchBar from "react-native-dynamic-search-bar"
 
 // static styles
 const ROOT: ViewStyle = {
@@ -37,6 +38,8 @@ export function Header(props: HeaderProps) {
     titleStyle,
     rightButton,
     iconSize,
+    searchBar,
+    searchBarStyle,
   } = props
   const header = headerText || (headerTx && translate(headerTx)) || ""
 
@@ -44,26 +47,32 @@ export function Header(props: HeaderProps) {
     <View style={[ROOT, style]}>
       {leftIcon ? (
         <Button preset="link" onPress={onLeftPress}>
-          <Icon icon={leftIcon} style={{width:iconSize||24, height:iconSize||24}} />
+          <Icon icon={leftIcon} style={{ width: iconSize || 24, height: iconSize || 24 }} />
         </Button>
       ) : (
         <View style={LEFT} />
       )}
       <View style={TITLE_MIDDLE}>
         <Text style={[TITLE, titleStyle]} text={header} />
+        {searchBar ? (
+          <SearchBar
+            style={searchBarStyle}
+            placeholderTextColor={color.palette.white}
+            textInputStyle={{ color: color.palette.white }}
+            searchIconImageStyle={{ tintColor: color.palette.white }}
+            clearIconImageStyle={{ tintColor: color.palette.white }}
+            darkMode={true}
+          />
+        ) : null}
       </View>
       {rightIcon ? (
         <Button preset="link" onPress={onRightPress}>
-          <Icon icon={rightIcon} style={{width:iconSize||24, height:iconSize||24}} />
+          <Icon icon={rightIcon} style={{ width: iconSize || 24, height: iconSize || 24 }} />
         </Button>
-      ) : (
+      ) : searchBar ? undefined : (
         <View style={RIGHT} />
       )}
-      {rightButton ? (
-        props.rightButton
-      ) : (
-        <View style={RIGHT} />
-      )}
+      {rightButton ? props.rightButton : searchBar ? undefined : <View style={RIGHT} />}
     </View>
   )
 }

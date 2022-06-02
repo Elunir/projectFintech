@@ -13,6 +13,10 @@ export interface HeaderProps {
    */
   headerText?: string
 
+  searchBar?: boolean
+  searchBarStyle?: ViewStyle | Array<ViewStyle> | undefined;
+
+
   /**
    * Icon that should appear on the left
    */

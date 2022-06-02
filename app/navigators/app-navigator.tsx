@@ -8,7 +8,7 @@ import React from "react"
 import { useColorScheme } from "react-native"
 import { NavigationContainer, DefaultTheme, DarkTheme } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import { WelcomeScreen, DemoScreen, DemoListScreen } from "../screens"
+import { WelcomeScreen, DemoScreen, DemoListScreen, SearchScreen } from "../screens"
 import { navigationRef, useBackButtonHandler } from "./navigation-utilities"
 import { HomeScreen } from "../screens/home/home-screen"
 import { NewRequestScreen } from "../screens/new-request/new-request-screen"
@@ -33,6 +33,7 @@ export type NavigatorParamList = {
   // 🔥 Your screens go here
   home: undefined
   newRequest: undefined
+  search: undefined
 }
 
 // Documentation: https://reactnavigation.org/docs/stack-navigator/
@@ -52,6 +53,7 @@ const AppStack = () => {
       {/** 🔥 Your screens go here */}
       <Stack.Screen name="home" component={HomeScreen} />
       <Stack.Screen name="newRequest" component={NewRequestScreen} />
+      <Stack.Screen name="search" component={SearchScreen} />
     </Stack.Navigator>
   )
 }

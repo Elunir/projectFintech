@@ -8,6 +8,8 @@ import { Header, Sheet, Transaction } from "../../components"
 import styles from "./home-styles"
 import { color } from "../../theme"
 import transactionList from "./transactions"
+import { Ionicons } from "@expo/vector-icons"
+
 
 export const HomeScreen: FC<StackScreenProps<NavigatorParamList, "home">> = observer(
   function HomeScreen() {
@@ -67,6 +69,16 @@ export const HomeScreen: FC<StackScreenProps<NavigatorParamList, "home">> = obse
           </TouchableOpacity>
         </View>
         <Sheet>
+        <View style={styles.bottomSheetHeader}>
+          <Text style={styles.bottomSheetHeaderTitle}>All Transactions</Text>
+          <View style={styles.bottomSheetHeaderSort}>
+            <Text style={styles.bottomSheetHeaderSortBy}>Sort by:</Text>
+            <TouchableOpacity style={styles.bottomSheetHeaderSort}>
+              <Text style={styles.bottomSheetHeaderSortTitle}>Recents</Text>
+              <Ionicons name="chevron-down" size={20} color="white" />
+            </TouchableOpacity>
+          </View>
+        </View>
           <FlatList
             data={transactionList.transactions}
             renderItem={_renderItem}
